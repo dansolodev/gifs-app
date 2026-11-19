@@ -42,11 +42,4 @@ export const mockGifs: Gif[] = [
         width: 300,
         height: 400,
     },
-    {
-        id: '6',
-        title: 'Messi is the best',
-        url: 'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNThyZXBwbHFtdHNpYnh4ZnN0aGswcWJydXNwdnpjaXV0eXNlYXp1YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/8BSJinJ8of9L0unCqW/giphy.gif',
-        width: 350,
-        height: 280,
-    },
 ];
