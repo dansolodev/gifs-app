@@ -1,15 +1,17 @@
 import { useState } from "react";
 
 import { GifList } from "./gifs/components/GifList";
-import { mockGifs } from "./mock-data/gifs.mock";
 import { CustomHeader } from "./shared/components/CustomHeader";
 import { PreviousSearches } from "./shared/components/PreviousSearches";
 import { SearchBar } from "./shared/components/SearchBar";
 import { getGifsByQuery } from "./gifs/actions/get-gifs-by-query.actions";
+import type { Gif } from "./gifs/interfaces/gif.interface";
 
 export const GifsApp = () => {
 
-    const [previousTerms, setPreviousTerms] = useState(['dragon ball z'])
+    const [previousTerms, setPreviousTerms] = useState<string[]>([]);
+
+    const [giphys, setGiphys] = useState<Gif[]>([]);
 
     const handleTermClicked = (term: string) => {
         console.log({ term });
@@ -25,7 +27,8 @@ export const GifsApp = () => {
         setPreviousTerms(currentTerms);*/
 
         setPreviousTerms([query, ...previousTerms].slice(0, 8));
-        const gifs = await getGifsByQuery(query);
+        const giphys = await getGifsByQuery(query);
+        setGiphys(giphys)
     };
 
     return (
@@ -44,7 +47,7 @@ export const GifsApp = () => {
             />
 
             {/* Gifs */}
-            <GifList emptyListMessage="No hay gifs" gifs={mockGifs} />
+            <GifList emptyListMessage="No hay gifs" gifs={giphys} />
         </>
     );
 };
