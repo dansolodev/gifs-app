@@ -14,13 +14,17 @@ export const GifsApp = () => {
         console.log({ term });
     }
 
+    const handleSearch = (query: string) => {
+        console.log({ query });
+    };
+
     return (
         <>
             {/* Header */}
             <CustomHeader title="Buscador de Gifs" description="Descubre y comparte el Gif perfecto" />
 
             {/* Search */}
-            <SearchBar placeholder="Buscar gifs..." textButton="Buscar" />
+            <SearchBar placeholder="Buscar gifs..." textButton="Buscar" onQuery={handleSearch} />
 
             {/* Búsquedas recientes */}
             <PreviousSearches
