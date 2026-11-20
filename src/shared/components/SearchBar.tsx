@@ -21,11 +21,11 @@ export const SearchBar = ({ placeholder = 'Buscar', textButton, onQuery }: Props
             clearTimeout(timeoutId);
         };
 
-    }, [query, onQuery]);
+    }, [query]);
 
     const handleSearch = () => {
         onQuery(query);
-        setQuery('');
+        //setQuery('');
     }
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
