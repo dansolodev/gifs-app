@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { Gif } from "../interfaces/gif.interface";
 import { getGifsByQuery } from "../actions/get-gifs-by-query.actions";
+
+// const gifsCahe: Record<string, Gif[]> = {}; - Así no se recompone
 
 export const useGifs = (initialPrevTerms: string[] = [], initialGifs: Gif[] = []) => {
 
@@ -8,7 +10,15 @@ export const useGifs = (initialPrevTerms: string[] = [], initialGifs: Gif[] = []
 
     const [giphys, setGiphys] = useState<Gif[]>(initialGifs);
 
+    const gifsCahe = useRef<Record<string, Gif[]>>({});
+
     const handleTermClicked = async (term: string) => {
+
+        if (gifsCahe.current[term]) {
+            setGiphys(gifsCahe.current[term]);
+            return;
+        }
+
         const giphys = await getGifsByQuery(term);
         setGiphys(giphys)
     }
@@ -25,6 +35,8 @@ export const useGifs = (initialPrevTerms: string[] = [], initialGifs: Gif[] = []
         setPreviousTerms([query, ...previousTerms].slice(0, 8));
         const giphys = await getGifsByQuery(query);
         setGiphys(giphys)
+
+        gifsCahe.current[query] = giphys;
     };
 
     return {
